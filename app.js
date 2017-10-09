@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var indexRoutes = require('./routes/index');
 var messageRoutes = require('./routes/message');
+var userRoutes = require('./routes/user');
 
 var app = express();
 app.disable( 'x-powered-by' );
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/message', messageRoutes);
+app.use('/user', userRoutes);
 app.use('/', indexRoutes);
 
 // catch 404 and forward to error handler
