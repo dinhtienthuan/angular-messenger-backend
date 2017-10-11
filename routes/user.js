@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/user');
+var MODEL_PATH = '../models/';
+var User = require(MODEL_PATH + '/user');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-router.post('/', function(req, res, next) {
+router.post('/sign-up', function(req, res, next) {
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -30,7 +31,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.post('/signin', function(req, res, next) {
+router.post('/sign-in', function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, user) {
     if (err) {
       return res.status(500)
