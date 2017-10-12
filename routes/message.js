@@ -8,6 +8,7 @@ var User = require(MODEL_PATH + 'user');
 
 router.get('/', function(req, res, next) {
   Message.find()
+    .populate('user', 'firstName')
     .exec(function(err, messages) {
       if (err) {
         return res.status(500)
@@ -66,7 +67,7 @@ router.post('/', function(req, res, next) {
 
       user.messages.push(result);
       user.save();
-
+      result.user = user;
       res.status(201)
         .json({
           message: 'Saved message',
